@@ -10,6 +10,10 @@ import {
 
 } from "react-router-dom";
 import Home from './pages/Home/Home/Home';
+import NavigationBar from './pages/Shared/NavigationBar/NavigationBar';
+import Footer from './pages/Shared/Footer/Footer';
+import Login from './pages/Login/Login/Login';
+import AddProduct from './pages/Admin/AddProduct/AddProduct';
 
 function App() {
   return (
@@ -17,19 +21,28 @@ function App() {
 
       <Router>
 
+        <NavigationBar></NavigationBar>
+
         <Switch>
 
-          <Route path="/">
-            <Home></Home>
-          </Route>
           <Route path="/home">
             <Home></Home>
           </Route>
-          <Route path="/">
 
+          <Route path="/login">
+            <Login></Login>
+          </Route>
+          <Route path="/addProduct">
+            <AddProduct></AddProduct>
+          </Route>
+
+          <Route exact path="/">
+            <Home></Home>
           </Route>
 
         </Switch>
+
+        <Footer></Footer>
 
       </Router>
 

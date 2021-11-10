@@ -1,14 +1,16 @@
 import React from 'react';
-import NavigationBar from '../../Shared/NavigationBar/NavigationBar';
+
 import Banner from '../Banner/Banner';
 import Products from '../Products/Products';
+import Reviews from '../Reviews/Reviews';
 
 const Home = () => {
     return (
         <div>
-            <NavigationBar></NavigationBar>
+
             <Banner></Banner>
             <Products></Products>
+            <Reviews></Reviews>
         </div>
     );
 };
