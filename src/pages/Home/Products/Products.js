@@ -10,7 +10,7 @@ const Products = () => {
             .then(res => res.json())
             .then(data => setProducts(data))
 
-    }, [products]);
+    }, []);
 
     return (
         <div className="container">
