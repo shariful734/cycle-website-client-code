@@ -21,7 +21,7 @@ const PlacedOrder = () => {
 
 
     useEffect(() => {
-        fetch(`http://localhost:8000/Products/${orderId}`)
+        fetch(`https://rocky-island-88656.herokuapp.com/Products/${orderId}`)
             .then(res => res.json())
             .then(data => setProduct(data));
     }, []);
@@ -37,7 +37,7 @@ const PlacedOrder = () => {
         setOrders(orderDetail);
         console.log(orderDetail);
 
-        axios.post('http://localhost:8000/orders', orderDetail)
+        axios.post('https://rocky-island-88656.herokuapp.com/orders', orderDetail)
             .then(res => {
                 if (res.data.insertedId) {
                     alert('order placed successfully');

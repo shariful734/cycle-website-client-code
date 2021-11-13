@@ -11,7 +11,7 @@ const Review = () => {
 
     const onSubmit = data => {
 
-        axios.post('http://localhost:8000/reviews', data)
+        axios.post('https://rocky-island-88656.herokuapp.com/reviews', data)
             .then(res => {
                 if (res.data.insertedId) {
                     alert('review was successfully');
