@@ -10,24 +10,29 @@ import {
 
 } from "react-router-dom";
 import Home from './pages/Home/Home/Home';
-import NavigationBar from './pages/Shared/NavigationBar/NavigationBar';
+
 import Footer from './pages/Shared/Footer/Footer';
 import Login from './pages/Login/Login/Login';
-import AddProduct from './pages/Admin/AddProduct/AddProduct';
+
 import AllProducts from './pages/AllProducts/AllProducts';
-import PlacedOrder from './pages/Orders/PlacedOrder/PlacedOrder';
+
 import AuthProvider from './Context/AuthProvider/AuthProvider';
 import Register from './pages/Login/Registe/Register';
+import PlacedOrder from './pages/Orders/PlacedOrder/PlacedOrder';
+import Dashboard from './pages/Dashboard/Dashboard/Dashboard';
+import NotFound from './pages/NotFount/NotFound';
+import PrivateRoute from './pages/Login/PrivateRoute/PrivateRoute';
+
 
 
 function App() {
   return (
-    <div className="">
+    <div className="body-container">
       <AuthProvider>
 
         <Router>
 
-          <NavigationBar></NavigationBar>
+
 
           <Switch>
 
@@ -39,24 +44,42 @@ function App() {
               <Login></Login>
             </Route>
 
-            <Route path="/addProduct">
+            {/* <Route path="/Review">
+              <Review></Review>
+            </Route> */}
+
+            {/* <Route path="/addProduct">
               <AddProduct></AddProduct>
-            </Route>
+            </Route> */}
+
+            <PrivateRoute path="/dashboard">
+              <Dashboard></Dashboard>
+            </PrivateRoute>
+
+
+
+            <PrivateRoute path="/placedOrder/:orderId">
+              <PlacedOrder></PlacedOrder>
+            </PrivateRoute>
 
             <Route path="/allProducts">
               <AllProducts></AllProducts>
             </Route>
 
-            <Route path="/allProducts">
-              <AllProducts></AllProducts>
-            </Route>
+
 
             <Route path="/register">
               <Register></Register>
             </Route>
 
+
+
             <Route exact path="/">
               <Home></Home>
+            </Route>
+
+            <Route exact path="*">
+              <NotFound></NotFound>
             </Route>
 
 

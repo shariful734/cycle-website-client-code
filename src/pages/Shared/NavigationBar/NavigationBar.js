@@ -15,11 +15,14 @@ const NavigationBar = () => {
                     <Navbar.Toggle />
                     <NavbarCollapse className="justify-content-end">
                         <NavLink className="link" to="/home">Home</NavLink>
+                        <NavLink className="link" to="/allProducts">More Cycles</NavLink>
+                        {
+                            user?.email && <NavLink className="link" to="/dashboard">Dashboard</NavLink>
 
-
-                        <NavLink className="link" to="/addProduct">Add Product</NavLink>
-                        <NavLink className="link" to="/allProducts">All Products</NavLink>
-
+                        }
+                        {
+                            user?.displayName && <span className="text-white me-2">{user.displayName} </span>
+                        }
                         {
                             user?.email ? <Button onClick={logOut}>LogOut</Button> :
                                 <NavLink className="link" to="/login">Login</NavLink>

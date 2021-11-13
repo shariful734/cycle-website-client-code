@@ -1,0 +1,11 @@
+.dashboard-header{
+    height: 120px;
+margin-bottom: 40px;
+    margin-top: 70px;
+}
+
+.menu{
+    border-right: 3px solid rgb(204, 201, 201) ;
+    height:595px;
+border-top:3px solid  rgb(204, 201, 201) ;
+}

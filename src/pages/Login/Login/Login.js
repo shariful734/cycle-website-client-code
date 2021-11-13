@@ -3,6 +3,7 @@ import { Alert, Spinner } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import { NavLink, useLocation, useHistory } from 'react-router-dom';
 import useAuth from '../../../hooks/useAuth';
+import NavigationBar from '../../Shared/NavigationBar/NavigationBar';
 
 const Login = () => {
 
@@ -19,33 +20,37 @@ const Login = () => {
         reset();
     }
     return (
-        <div className="add-product text-center vh-100">
+        <div>
+            <NavigationBar></NavigationBar>
 
-            <h1 className="text-primary  m-3">Login</h1>
+            <div className="add-product text-center vh-50">
 
-            <form onSubmit={handleSubmit(onSubmit)}>
+                <h1 className="text-primary  m-3">Login</h1>
 
-                <input {...register("email",)} placeholder="your email" />
-                <input {...register("password",)} placeholder="password" />
+                <form onSubmit={handleSubmit(onSubmit)}>
 
-                <button className="bg-success px-4 py-1 " type="submit" >Login</button>
-                <NavLink to="/register"><h5 className="my-4">New User? please Register </h5></NavLink>
+                    <input {...register("email",)} placeholder="your email" />
+                    <input type="password" {...register("password",)} placeholder="password" />
+
+                    <button className="bg-success px-5 py-1 " type="submit" >Login</button>
+                    <NavLink to="/register"><h5 className="my-4">New User? please Register </h5></NavLink>
+                    {
+                        isLoading && <Spinner animation="border" variant="danger" />
+                    }
+                </form>
+
                 {
-                    isLoading && <Spinner animation="border" variant="danger" />
+                    user?.email && <Alert variant="info">
+                        user created successfully
+                    </Alert>
                 }
-            </form>
+                {
+                    authError && <Alert variant="danger">
+                        {authError}
+                    </Alert>
+                }
 
-            {
-                user?.email && <Alert variant="info">
-                    user created successfully
-                </Alert>
-            }
-            {
-                authError && <Alert variant="danger">
-                    {authError}
-                </Alert>
-            }
-
+            </div>
         </div>
     );
 };

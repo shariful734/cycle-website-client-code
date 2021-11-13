@@ -17,7 +17,7 @@ const Product = ({ product }) => {
                             {description.slice(0, 120)}
                             <h3 className="mt-2">Price: {price}$</h3>
                         </Card.Text>
-                        <NavLink to={`/placedOrder/${_id}`} > <Button variant="success">Place Booking</Button> </NavLink>
+                        <NavLink to={`/placedOrder/${_id}`} > <Button className="product-btn" variant="success">Place Booking</Button> </NavLink>
                     </Card.Body>
                 </Card>
 

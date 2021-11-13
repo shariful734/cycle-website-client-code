@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import initializeFirebase from "../Firebase/Firebase.init";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "firebase/auth";
+import axios from 'axios';
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, updateProfile } from "firebase/auth";
 
 
 initializeFirebase();
@@ -9,11 +10,12 @@ const useFirebase = () => {
 
     const [user, setUser] = useState({});
     const [isLoading, setIsLoading] = useState(true);
-    const [authError, setAuthError] = useState('')
+    const [authError, setAuthError] = useState('');
+    const [admin, setAdmin] = useState(false);
 
     const auth = getAuth();
 
-    const registerUser = (email, password) => {
+    const registerUser = (email, password, name, history) => {
         setIsLoading(true);
         if (password.length !== 6) {
             alert('password should be 6 character lomg')
@@ -24,6 +26,23 @@ const useFirebase = () => {
             .then(result => {
                 setUser(result.user);
                 setAuthError('');
+                const newUser = { email, displayName: name }
+                setUser(newUser)
+
+                // saving user to database 
+                saveUser(email, name);
+
+                // sending name to firebase 
+                updateProfile(auth.currentUser, {
+                    displayName: name
+                }).then(() => {
+                    // Profile updated!
+                    // ...
+                }).catch((error) => {
+                    // An error occurred
+                    // ...
+                });
+                history.replace('/');
             })
             .catch((error) => {
 
@@ -65,7 +84,13 @@ const useFirebase = () => {
             setIsLoading(false)
         });
         return () => unsubscribe;
-    }, []);
+    }, [auth]);
+
+    useEffect(() => {
+        fetch(`http://localhost:8000/users/${user.email}`)
+            .then(res => res.json())
+            .then(data => setAdmin(data.admin))
+    }, [user.email])
 
 
     const logOut = () => {
@@ -78,9 +103,19 @@ const useFirebase = () => {
             .finally(() => setIsLoading(false));
     }
 
+    const saveUser = (email, displayName) => {
+        const user = { email, displayName }
+
+        axios.post('http://localhost:8000/users', user)
+            .then(res => {
+
+            })
+    }
+
     return {
         user,
         isLoading,
+        admin,
         authError,
         registerUser,
         login,
